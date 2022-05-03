@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.shortcuts import render, HttpResponse
 from datetime import datetime
 from home.models import Contact
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -32,5 +33,6 @@ def contact(request):
         desc = request.POST.get('desc')
         contact = Contact(username = username,email=email,address=address,city=city,state=state,zip=zip,desc=desc,date=datetime.today())
         contact.save()
+        messages.success(request, 'Your message has been sent ! ')
     return render(request,'contact.html')
     # return HttpResponse("This is Contact page")
